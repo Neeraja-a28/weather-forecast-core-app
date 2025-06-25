@@ -1,0 +1,13 @@
+<h1>Forecast</h1>
+
+<p><strong>Address:</strong> <%= @location.street %>, <%= @location.city %>, <%= @location.state %>, <%= @location.country_code %> - <%= @location.zip %></p>
+
+<% if @forecast.present? && @forecast["main"].present? %>
+  <p><strong>Temperature:</strong> <%= @forecast["main"]["temp"] %>°C</p>
+  <p><strong>Condition:</strong> <%= @forecast["weather"]&.first&.dig("description") %></p>
+  <p><strong>From Cache:</strong> <%= @from_cache ? "Yes" : "No" %></p>
+<% else %>
+  <p><strong>Error:</strong> Weather data could not be retrieved. Please check your ZIP and country code.</p>
+<% end %>
+</br>
+<%= link_to "Back", locations_path %>
